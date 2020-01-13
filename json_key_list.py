@@ -57,10 +57,11 @@ def json2line(json_dict, line_map, current_key=BASE_NAME, drop=False):
         current_key = base_key
 
 
-def __mapping_line(line_value, line_map, drop, current_key=BASE_NAME, list_index=0):
+def __mapping_line(line_value, line_map, drop,
+                   current_key=BASE_NAME, list_index=0):
     """
     JSON読み込み中のlist形式データを処理する.
-    
+
     Parameters
     ----------
     line_value : list
@@ -77,7 +78,8 @@ def __mapping_line(line_value, line_map, drop, current_key=BASE_NAME, list_index
     """
     base_key = current_key
     for value in line_value:
-        current_key = current_key + JSON_SEP + LIST_INDEX_NAME.format(index=list_index)
+        current_key = current_key + JSON_SEP + \
+                      LIST_INDEX_NAME.format(index=list_index)
         __filtering_line_value(value, line_map, current_key, drop)
         current_key = base_key
         list_index = list_index + 1
@@ -91,7 +93,7 @@ def __decide_value(value, value_type, drop):
 
 def __filtering_obj_value(value, line_map, current_key, drop):
     if type(value) == dict:
-        line_map[current_key] = __decide_value(value, 'dict', drop)             
+        line_map[current_key] = __decide_value(value, 'dict', drop)
         json2line(value, line_map, current_key, drop)
     elif type(value) == list:
         line_map[current_key] = __decide_value(value, 'list', drop)
