@@ -1,0 +1,12 @@
+{
+  "sample": {
+    "simple_value": "simple_value",
+    "list": [
+      "list_value01",
+      "list_value02"
+    ],
+    "object": {
+      "object_value":  "object_value"
+    }
+  }
+}
