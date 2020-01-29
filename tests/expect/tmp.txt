@@ -1,0 +1,24 @@
+###### change base_name ######
+base_name.sample
+base_name.sample.simple_value
+base_name.sample.list
+base_name.sample.list.###list_index[0]###
+base_name.sample.list.###list_index[1]###
+base_name.sample.object
+base_name.sample.object.object_value
+###### remove base_name (show value) ######
+sample: {'simple_value': 'simple_value', 'list': ['list_value01', 'list_value02'], 'object': {'object_value': 'object_value'}}
+sample.simple_value: simple_value
+sample.list: ['list_value01', 'list_value02']
+sample.list.###list_index[0]###: list_value01
+sample.list.###list_index[1]###: list_value02
+sample.object: {'object_value': 'object_value'}
+sample.object.object_value: object_value
+###### remove base_name and drop value when data type is object or list (show value) ######
+sample: {}
+sample.simple_value: simple_value
+sample.list: []
+sample.list.###list_index[0]###: list_value01
+sample.list.###list_index[1]###: list_value02
+sample.object: {}
+sample.object.object_value: object_value

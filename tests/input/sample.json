@@ -1,0 +1,36 @@
+{
+  "sample": {
+    "simple_value": "simple_value",
+    "list": [
+      "list_value01",
+      "list_value02"
+    ],
+    "object": {
+      "object_value":  "object_value",
+      "list_in_object": {
+        "list": [
+          "list_value01",
+          "list_value02"
+        ]
+      },
+      "object_in_object": {
+        "value_of_object_in_object": "value_of_object_in_object"
+      },
+      "object_in_list": [
+        {
+          "value01": "value01"
+        },
+        {
+          "list": [
+            "value01",
+            "value02",
+            [
+              "list_in_list_value01",
+              "list_in_list_value02"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}
