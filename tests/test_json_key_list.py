@@ -46,16 +46,10 @@ def test_basic_usage(input_json, drop, expect):
     input_json_path = os.path.join(INPUT_DIR, input_json)
     expect_path = os.path.join(EXPECT_DIR, expect)
     test_json = read_input(input_json_path)
+    expect_map = read_expect(expect_path)
+
     line_map = dict()
     json_key_list.json2line(test_json, line_map, drop=drop)
 
-    expect_map = read_expect(expect_path)
-
-    print(line_map)
-    print()
-    print(expect_map)
-    assert type(line_map) == type(expect_map)
-#     assert json.dumps(line_map, indent=4) == json.dumps(expect_map, indent=4)
-    # assert line_map == expect_map
     for key in line_map.keys():
         assert str(line_map[key]) == expect_map[key].replace('\"', '')
