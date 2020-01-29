@@ -26,7 +26,7 @@ def print_keys(dict_):
 
 def print_key_values(dict_):
     for key in dict_:
-        print(str(key) + ' : ' + str(dict_[key]))
+        print(str(key) + ': ' + str(dict_[key]))
 
 with open(json_path) as f:
     input_json = json.load(f)
