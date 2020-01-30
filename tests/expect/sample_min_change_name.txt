@@ -1,0 +1,7 @@
+OBJ.sample: {'simple_value': 'simple_value', 'list': ['list_value01', 'list_value02'], 'object': {'object_value': 'object_value'}}
+OBJ.sample.simple_value: simple_value
+OBJ.sample.list: ['list_value01', 'list_value02']
+OBJ.sample.list.###list_index[0]###: list_value01
+OBJ.sample.list.###list_index[1]###: list_value02
+OBJ.sample.object: {'object_value': 'object_value'}
+OBJ.sample.object.object_value: object_value

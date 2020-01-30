@@ -53,3 +53,19 @@ def test_basic_usage(input_json, drop, expect):
 
     for key in line_map.keys():
         assert str(line_map[key]) == expect_map[key].replace('\"', '')
+
+
+def test_change_name():
+    # TODO use context manager
+    input_json_path = os.path.join(INPUT_DIR, 'sample_min.json')
+    expect_path = os.path.join(EXPECT_DIR, 'sample_min_change_name.txt')
+
+    test_json = read_input(input_json_path)
+    expect_map = read_expect(expect_path)
+
+    line_map = dict()
+    json_key_list.json2line(test_json, line_map, current_key='OBJ')
+
+    for key in line_map.keys():
+        assert str(line_map[key]) == expect_map[key].replace('\"', '')
+
