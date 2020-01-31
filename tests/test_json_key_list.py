@@ -65,7 +65,7 @@ def read_input(input_path):
     return json_dict
 
 
-def __compare_util(input_json, expect, drop, base_name=None):
+def __compare_util(input_json, expect, drop, base_name=None, remove_base=False):
     """
     テスト対象と期待値のファイルを読み込み、変換結果と比較するUtility.
 
@@ -79,6 +79,8 @@ def __compare_util(input_json, expect, drop, base_name=None):
         json2line実行時にvalueが配列やObjectの場合値を捨てるか.
     base_name : str
         JsonPathの一番はじめの値(Noneの場合はデフォルト。削除はしない).
+    remove_base : bool
+        JSON加工時に追加したroot_keyを削除するか否か.
     """
     input_json_path = os.path.join(INPUT_DIR, input_json)
     expect_path = os.path.join(EXPECT_DIR, expect)
@@ -88,8 +90,12 @@ def __compare_util(input_json, expect, drop, base_name=None):
     line_map = dict()
     if base_name is None:
         json_key_list.json2line(test_json, line_map, drop=drop)
+        base_name = BASE_NAME
     else:
         json_key_list.json2line(test_json, line_map, drop=drop, current_key=base_name)
+
+    if remove_base:
+        line_map = json_key_list.remove_base_name(line_map, base_name)
 
     for key in line_map.keys():
         assert str(line_map[key]) == expect_map[key].replace('\"', '')
@@ -106,3 +112,13 @@ def test_basic_usage(input_json, drop, expect):
 
 def test_change_name():
     __compare_util('sample_min.json', 'sample_min_change_name.txt', False, 'OBJ')
+
+
+@pytest.mark.parametrize('input_json, drop, expect', [
+    ('sample_min.json', False, 'sample_min_default_remove_base.txt'),
+    ('sample_min.json', True, 'sample_min_drop_remove_base.txt'),
+    ('sample.json', True, 'sample_drop_remove_base.txt'),
+])
+def test_remove_base_name(input_json, drop, expect):
+    __compare_util(input_json, expect, drop=drop, remove_base=True)
+
