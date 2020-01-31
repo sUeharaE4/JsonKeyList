@@ -46,8 +46,6 @@ def json2line(json_dict, line_map, current_key=BASE_NAME, drop=False):
         現在処理しているkey
     drop : bool
         valueがobject, list だった場合、値を保持しない場合はTrue
-
-    Returns
     -------
     """
     base_key = current_key
@@ -74,7 +72,6 @@ def __mapping_line(line_value, line_map, drop,
         現在処理しているkey
     list_index : int
         list形式データの現在処理しているindex
-
     """
     base_key = current_key
     for value in line_value:
