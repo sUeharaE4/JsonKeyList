@@ -37,35 +37,33 @@ def read_input(input_path):
     return json_dict
 
 
-@pytest.mark.parametrize('input_json, drop, expect', [
-    ('sample_min.json', False, 'sample_min_default.txt'),
-    ('sample_min.json', True, 'sample_min_drop.txt'),
-    ('sample.json', True, 'sample_drop.txt'),
-])
-def test_basic_usage(input_json, drop, expect):
+def __compare_util(input_json, expect, drop, base_name=None):
     input_json_path = os.path.join(INPUT_DIR, input_json)
     expect_path = os.path.join(EXPECT_DIR, expect)
     test_json = read_input(input_json_path)
     expect_map = read_expect(expect_path)
 
     line_map = dict()
-    json_key_list.json2line(test_json, line_map, drop=drop)
+    if base_name is None:
+        json_key_list.json2line(test_json, line_map, drop=drop)
+    else:
+        json_key_list.json2line(test_json, line_map, drop=drop, current_key=base_name)
 
     for key in line_map.keys():
         assert str(line_map[key]) == expect_map[key].replace('\"', '')
+
+
+
+
+@pytest.mark.parametrize('input_json, drop, expect', [
+    ('sample_min.json', False, 'sample_min_default.txt'),
+    ('sample_min.json', True, 'sample_min_drop.txt'),
+    ('sample.json', True, 'sample_drop.txt'),
+])
+def test_basic_usage(input_json, drop, expect):
+    __compare_util(input_json, expect, drop)
 
 
 def test_change_name():
-    # TODO use context manager
-    input_json_path = os.path.join(INPUT_DIR, 'sample_min.json')
-    expect_path = os.path.join(EXPECT_DIR, 'sample_min_change_name.txt')
-
-    test_json = read_input(input_json_path)
-    expect_map = read_expect(expect_path)
-
-    line_map = dict()
-    json_key_list.json2line(test_json, line_map, current_key='OBJ')
-
-    for key in line_map.keys():
-        assert str(line_map[key]) == expect_map[key].replace('\"', '')
+    __compare_util('sample_min.json', 'sample_min_change_name.txt', False, 'OBJ')
 
