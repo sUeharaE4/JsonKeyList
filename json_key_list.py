@@ -86,12 +86,43 @@ def __mapping_line(line_value, line_map, drop,
 
 
 def __decide_value(value, value_type, drop):
+    """
+    値を保持するかどうかに応じて値を決定するUtility.
+
+    Parameters
+    ----------
+    value : object
+        JsonPathに応じたValue
+    value_type : str
+        valueの型。返却する値を設定するために使用する.
+    drop : bool
+        valueがobject, list だった場合、値を保持しない場合はTrue
+
+    Returns
+    -------
+    value : object
+        値を保持する場合はそのまま。削除する場合はobject->{},list->[]
+    """
     if drop:
         return DROP_VALUE_MAP[value_type]
     return value
 
 
 def __filtering_obj_value(value, line_map, current_key, drop):
+    """
+    JSON の object をマッピングするためのUtility.
+
+    Parameters
+    ----------
+    value : object
+        JsonPathに応じたValue.
+    line_map : dict
+        ドットでつないだ形式でデータを保持する辞書.
+    current_key : str
+        現在処理しているkey
+    drop : bool
+        valueがobject, list だった場合、値を保持しない場合はTrue
+    """
     if type(value) == dict:
         line_map[current_key] = __decide_value(value, 'dict', drop)
         json2line(value, line_map, current_key, drop)
@@ -103,6 +134,20 @@ def __filtering_obj_value(value, line_map, current_key, drop):
 
 
 def __filtering_line_value(value, line_map, current_key, drop):
+    """
+    JSON の list をマッピングするためのUtility.
+
+    Parameters
+    ----------
+    value : object
+        JsonPathに応じたValue.
+    line_map : dict
+        ドットでつないだ形式でデータを保持する辞書.
+    current_key : str
+        現在処理しているkey
+    drop : bool
+        valueがobject, list だった場合、値を保持しない場合はTrue
+    """
     if type(value) == dict:
         line_map[current_key] = __decide_value(value, 'dict', drop)
         json2line(value, line_map, current_key, drop)
