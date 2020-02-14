@@ -42,7 +42,8 @@ json2line(input_json, line_map)
 removed_map = remove_base_name(line_map)
 print_key_values(removed_map)
 
-print('###### remove base_name and drop value when data type is object or list (show value) ######')
+print('###### remove base_name and drop value \
+       when data type is object or list (show value) ######')
 line_map = dict()
 json2line(input_json, line_map, drop=True)
 removed_map = remove_base_name(line_map)
