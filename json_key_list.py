@@ -1,4 +1,3 @@
-import json
 import const
 
 json_path = 'sample_min.json'
@@ -153,4 +152,3 @@ def __filtering_line_value(value, line_map, current_key, drop):
         __mapping_line(value, line_map, drop, current_key)
     else:
         line_map[current_key] = value
-
