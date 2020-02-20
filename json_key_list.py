@@ -1,4 +1,3 @@
-import json
 import const
 
 json_path = 'sample_min.json'
@@ -58,7 +57,7 @@ def json2line(json_dict, line_map, current_key=BASE_NAME, drop=False):
 def __mapping_line(line_value, line_map, drop,
                    current_key=BASE_NAME, list_index=0):
     """
-    JSON読み込み中のlist形式データを処理する.
+    JSON読み込み中のlist形式データを辞書に登録する.
 
     Parameters
     ----------
@@ -153,4 +152,3 @@ def __filtering_line_value(value, line_map, current_key, drop):
         __mapping_line(value, line_map, drop, current_key)
     else:
         line_map[current_key] = value
-
