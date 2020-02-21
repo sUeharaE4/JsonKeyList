@@ -14,8 +14,8 @@ LIST_INDEX_NAME = const.LIST_INDEX_NAME
 JSON_SEP = const.JSON_SEP
 DROP_VALUE_MAP = const.DROP_VALUE_MAP
 
-EXPECT_DIR = 'expect'
-INPUT_DIR = 'input'
+EXPECT_DIR = os.path.join(os.path.dirname(__file__), 'expect')
+INPUT_DIR = os.path.join(os.path.dirname(__file__), 'input')
 SEP = ': '
 
 
