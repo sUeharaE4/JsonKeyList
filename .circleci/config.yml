@@ -20,7 +20,7 @@ jobs:
           name: run test
           command: |
             . ../venv/bin/activate
-            pytest -v -l --durations=0 --cov=../ --cov-report=term-missing --showlocals
+            pytest -v -l --durations=0 --cov=../*.py --cov-report=term-missing --showlocals
           working_directory: ./tests
       - store-test-results:
           path: ./tests
