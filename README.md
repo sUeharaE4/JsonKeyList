@@ -30,7 +30,8 @@ JSON
 ```
 
 実際にはdictを受け取って、keyを書き換えたdictを返却しているので、valueも取得可能です。valueについてはobjectやlistの場合は{}とか[]に置き換えるオプションも用意しています。
-また、先頭の「###obj###」は任意の文字列に置き換えたり、カットすることも可能です。  
+また、先頭の「###obj###」は任意の文字列に置き換えたり、カットすることも可能です
+---
 「###obj###」をカット
 ```
 sample: {'simple_value': 'simple_value', 'list': ['list_value01', 'list_value02'], 'object': {'object_value': 'object_value'}}
